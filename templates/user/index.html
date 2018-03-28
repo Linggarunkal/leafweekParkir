@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>User Site</title>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/animate.min.css') }}" rel="stylesheet"> 
+    <link href="{{ url_for('static', filename='css/lightbox.css') }}" rel="stylesheet"> 
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/responsive.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/login/login.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/login/reset.css') }}" rel="stylesheet">
+
+
+    <!-- [if lt IE 9]> -->
+    <script src="{{ url_for('static', filename='js/html5shiv.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/respond.min.js') }}"></script>
+    <!-- <![endif]        -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/ico/favicon.ico') }}">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</head><!--/head-->
+<body>
+    <header id="header">      
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 overflow">
+                   <div class="social-icons pull-right">
+                        <ul class="nav nav-pills">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div> 
+                </div>
+             </div>
+        </div>
+        <div class="navbar navbar-inverse" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="index.html">
+                        <h1><img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo"></h1>
+                    </a>
+                    
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="index.html">Home</a></li>
+                        <!--<li><a href="profile.html">Manage Profile</a></li>-->
+                        <!--<li><a href="location.html">Searching Maps</a></li>                -->
+                        <!--<li><a href="payment.html">Payment</a></li>                   -->
+                        <!--<li><a href="history.html">History</a></li>                   -->
+                    </ul>
+                </div>
+                <div class="search">
+                    <form role="form">
+                        <i class="fa fa-search"></i>
+                        <div class="field-toggle">
+                            <input type="text" class="search-form" autocomplete="off" placeholder="Search">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--/#header-->
+
+    <div class="alert alert-primary" role="alert">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <section id="home-slider">
+    <div class="container">
+        <div class="row">
+            <div class="main-slider">
+                <div class="slide-text main-nav">
+                    <h1>We Connected All Parking Area</h1>
+                    <p>we connect all the parking lots, simplify the search and manage the payment process</p>
+                    <a href="#" class="btn btn-common cd-signin">Sign Up</a>
+                    <a href="#" class="btn btn-common cd-signup">Registration</a>
+                </div>
+                <img src="{{ url_for('static', filename='images/home/slider/hill.png') }}" class="slider-hill" alt="slider image">
+                <img src="{{ url_for('static', filename='images/home/slider/house.png') }}" class="slider-house" alt="slider image">
+                <img src="{{ url_for('static', filename='images/home/slider/sun.png') }}" class="slider-sun" alt="slider image">
+                <img src="{{ url_for('static', filename='images/home/slider/birds1.png') }}" class="slider-birds1" alt="slider image">
+                <img src="{{ url_for('static', filename='images/home/slider/birds2.png') }}" class="slider-birds2" alt="slider image">
+            </div>
+        </div>
+    </div>
+    <div class="preloader"><i class="fa fa-sun-o fa-spin"></i></div>
+    </section>
+
+    <div class="cd-user-modal"> <!-- this is the entire modal form, including the background -->
+        <div class="cd-user-modal-container"> <!-- this is the container wrapper -->
+            <ul class="cd-switcher">
+                <li><a href="#">Sign Up</a></li>
+                <li><a href="#">Registration</a></li>
+            </ul>
+
+            <div id="cd-login"> <!-- log in form -->
+                <form class="cd-form" method="post" action="{{ url_for('userSignIn') }}">
+                    <p class="fieldset">
+                        <label class="image-replace cd-email" for="signin-email">E-mail</label>
+                        <input class="full-width has-padding has-border" id="signin-email" name="signin-email" type="email" placeholder="E-mail or Phone Number" required="">
+                    </p>
+
+                    <p class="fieldset">
+                        <label class="image-replace cd-password" for="signin-password">Password</label>
+                        <input class="full-width has-padding has-border" id="signin-password" name="signin-password" type="password"  placeholder="Password" required="">
+                        <a href="#0" class="hide-password">Hide</a>
+                    </p>
+
+                    <p class="fieldset">
+                        <input type="checkbox" id="remember-me" checked>
+                        <label for="remember-me">Remember me</label>
+                    </p>
+
+                    <p class="fieldset">
+                        <input class="full-width" type="submit" value="Login">
+                    </p>
+                </form>
+                
+                <p class="cd-form-bottom-message"><a href="#0">Forgot your password?</a></p>
+            </div> <!-- cd-login -->
+
+            <div id="cd-signup" class="row cd-form"> <!-- sign up form -->
+                <form method="POST" action="{{ url_for('userSignup') }}">
+                    <div class="col-sm-6">
+                        <p class="fieldset">
+                            <label class="image-replace cd-username" for="firstname">Fistname</label>
+                            <input class="full-width has-padding has-border" id="firstname" name="firstname" type="name" placeholder="Firstname" required="">
+                        </p>
+
+                        <p class="fieldset">
+                            <label class="image-replace cd-username" for="lastname">Lastname</label>
+                            <input class="full-width has-padding has-border" id="lastname" name="lastname" type="name" placeholder="Lastname" required="">
+                        </p>
+
+                        <p class="fieldset">
+                            <label class="image-replace cd-email" for="inputEmail">E-mail</label>
+                            <input class="full-width has-padding has-border" id="inputEmail" name="inputEmail" type="email" placeholder="E-mail" required="">
+                        </p>
+
+                        <p class="fieldset">
+                            <label class="image-replace cd-phone" for="telp">Phone</label>
+                            <input class="full-width has-padding has-border" id="telp" name="telp" type="name" placeholder="Phone Number" required="" onkeyup="checkInput(this);">
+                        </p>
+                    </div>
+                
+
+                    <div class="col-sm-6">
+                        <p class="fieldset">
+                            <label class="image-replace cd-password" for="password">Password</label>
+                            <input class="full-width has-padding has-border" id="password" name="password" type="password"  placeholder="Password" required="">
+                            <a href="#0" class="hide-password">Hide</a>
+                        </p>
+
+                        <p class="fieldset">
+                            <label class="image-replace cd-password" for="repeatPassword">Repeat Password</label>
+                            <input class="full-width has-padding has-border" id="repeatPassword" name="repeatPassword" type="password"  placeholder="Confirm Password" required="">
+                            <a href="#0" class="hide-password">Hide</a>
+                        </p>
+
+                        <p class="fieldset">
+                            <label class="image-replace" for="plateNumber">Plate Number</label>
+                            <input class="full-width has-padding has-border" id="plateNumber" name="plateNumber" type="name" placeholder="Plate Number" required="">
+                        </p>
+
+                        <p class="fieldset">
+                            <label for="city" class="sr-only">Email address</label>
+                            <select name="city" id="city" class="form-control">
+                                {% for data in city %}
+                                    <option id={{ data[0] }}>{{ data[1] }}</option>
+                                {% endfor %}
+                            </select>
+                        </p>
+                    </div>
+
+                    <div class="col-sm-12 margin-top-login">
+                        <p class="fieldset">
+                            <input type="checkbox" id="accept-terms">
+                            <label for="accept-terms">I agree to the <a href="#0">Terms</a></label>
+                        </p>
+
+                        <p class="fieldset">
+                            <input class="full-width has-padding" type="submit" value="Create account">
+
+
+
+
+                        </p>
+                    </div>
+                </form>
+            </div> <!-- cd-signup -->
+
+            <div id="cd-reset-password"> <!-- reset password form -->
+                <p class="cd-form-message">Lost your password? Please enter your email address. You will receive a link to create a new password.</p>
+
+                <form class="cd-form">
+                    <p class="fieldset">
+                        <label class="image-replace cd-email" for="reset-email">E-mail</label>
+                        <input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail" required="">
+                    </p>
+
+                    <p class="fieldset">
+                        <input class="full-width has-padding" type="submit" value="Reset password">
+                    </p>
+                </form>
+
+                <p class="cd-form-bottom-message"><a href="#0">Back to log-in</a></p>
+            </div> <!-- cd-reset-password -->
+            <a href="#0" class="cd-close-form">Close</a>
+        </div> <!-- cd-user-modal-container -->
+    </div> <!-- cd-user-modal -->
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/lightbox.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/wow.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>  
+    <script type="text/javascript" src="{{ url_for('static', filename='js/login.js') }}"></script>  
+    <script type="text/javascript" src="{{ url_for('static', filename='js/checkinput.js') }}"></script>
+
+
+    
+</body>
+</html>

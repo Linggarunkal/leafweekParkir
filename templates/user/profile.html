@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>User Site</title>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/lightbox.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/responsive.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+        <script src="{{ url_for('static', filename='js/html5shiv.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/respond.min.js') }}"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/ico/favicon.ico') }}">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- remove this if you use Modernizr -->
+    <script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>
+</head><!--/head-->
+<body>
+    <header id="header">      
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 overflow">
+                   <div class="social-icons pull-right">
+                        <ul class="nav nav-pills">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div> 
+                </div>
+             </div>
+        </div>
+        <div class="navbar navbar-inverse" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="index.html">
+                        <h1><img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo"></h1>
+                    </a>
+                    
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{{ url_for('userHistory') }}">History</a></li>
+                        <li class="active"><a href="{{ url_for('userProfile') }}">Manage Profile</a></li>
+                        <li><a href="{{ url_for('searchMaps') }}">Searching Maps</a></li>
+                        <li><a href="{{ url_for('userPayment') }}">Payment</a></li>
+                        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+
+                    </ul>
+                </div>
+                <div class="search">
+                    <form role="form">
+                        <i class="fa fa-search"></i>
+                        <div class="field-toggle">
+                            <input type="text" class="search-form" autocomplete="off" placeholder="Search">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--/#header-->
+
+    <section id="page-breadcrumb">
+        <div class="vertical-center sun">
+             <div class="container">
+                <div class="row">
+                    <div class="action">
+                        <div class="col-sm-12">
+                            <h1 class="title">Profile</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--/#page-breadcrumb-->
+    <section id="projects">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-4 profile">
+                    <div class="sidebar portfolio-sidebar">
+                        <div class="sidebar-item categories">
+                            <img src="{{ url_for('static', filename='images/profile.png') }}">
+                            <h3 class="profile-name">Nama Profile </h3>
+                            <ul class="nav navbar-stacked">
+                                <li><a href="{{ url_for('userHistory') }}">History</a></li>
+                                <li class="active"><a href="{{ url_for('userProfile') }}">Manage Profile</a></li>
+                                <li><a href="{{ url_for('searchMaps') }}">Searching Maps</a></li>
+                                <li><a href="{{ url_for('userPayment') }}">Payment</a></li>
+                                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-8">
+                    <form method="POST" action="{{ url_for('postProfile') }}">
+                        <h2>Manage Profile</h2>
+                        
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <input type="hidden" name="user_id" id="user_id" class="form-control" required="required" placeholder="User id" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="name" name="firstname" id="firstname" class="form-control" required="required" placeholder="Firstname" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="name" name="lastname" id="lastname" class="form-control" placeholder="Lastname" value="">
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" id="identityType" name="identityType">
+                                        <option name="Null" id="Null">-- Select Identity --</option>
+                                        <option name="ktp" id="ktp">KTP</option>
+                                        <option name="kitas" id="kitas">KITAS</option>
+                                        <option name="passport" id="passport">PASSPORT</option>
+                                        <option name="sim" id="sim">SIM</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="name" name="identityNumber" id="identityNumber" class="form-control" placeholder="Identity Number" value="">
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" id="gender" name="gender">
+                                        <option name="" id="">-- Select Gender --</option>
+                                        <option name="male" id="male">Male</option>
+                                        <option name="female" id="female">Female</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" id="cityName" name="cityName">
+                                        <option name="">-- Select City --</option>
+                                        {% for data in city_name %}
+                                            <option name='{{ data[0] }}' id='{{ data[0] }}'>{{ data[1] }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <img src="{{ url_for('static', filename='images/3.jpg') }}" width="200" class="img-profile">
+                                </div>     
+                                <div class="form-group file-upload">
+                                    <input type="file" name="foto" id="file-2" class="inputfile inputfile-2 " data-multiple-caption="{count} files selected" multiple />
+                                    <label for="file-2">
+                                        <span>Ubah Foto Profil</span>
+                                    </label>
+                                </div> 
+
+                                
+                                 
+
+                                
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                            <div class="form-group input_fields_wrap">
+                                <div class="input-group">
+                                    <input type="name" name="phoneNumber" id="phoneNumber" class="form-control telp" value="081234567890">
+                                    <span class="input-group-addon">
+                                        <input type="checkbox" class="agree_telp" id="agree_telp"> 
+                                            <label for="agree_telp">Edit </label>                                      
+                                    </span>
+                                </div>
+                                <div class="input-group">
+                                    <input type="email" name="email" id="email" class="form-control email" value="wijayantoagung88@gmail.com">
+                                    <span class="input-group-addon">
+                                        <input type="checkbox" class="agree_email" id="agree_email">
+                                            <label for="agree_email">Edit</label>                                
+                                    </span>
+                                </div> 
+                                    <div class="input-group">
+                                        {% for plate in  platenumber %}
+                                            <input type="name" name="plate" id="plate" class="form-control" required="required" placeholder="Plate Number" value="{{ plate }}">
+                                        {% endfor %}
+                                        <!--<input type="text" name="no_plat[]" class="form-control" required="required" placeholder="Plate Number" value="N 6444 LAM">-->
+                                        <span class="input-group-btn">
+                                            <button class="add_field_button btn btn-success btn-custom-action"><i class="fa fa-plus"></i> Add</button> 
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <!--<input type="submit" name="submit" class="btn btn-submit" value="">-->
+                                    <button type="submit" name="submitProfile" class="btn btn-submit">Update Profile</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/#profile-->
+
+
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="copyright-text text-center">
+                        <p>&copy; 2017. All Rights Reserved.</p>
+                        <p>Created by Linggar</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--/#footer-->
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/lightbox.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/custom-file-input.js') }}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var max_fields      = 10; //maximum input boxes allowed
+            var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+            var add_button      = $(".add_field_button"); //Add button ID
+           
+            var x = 1; //initlal text box count
+            $(add_button).click(function(e){ //on add input button click
+                e.preventDefault();
+                if(x < max_fields){ //max input box allowed
+                    x++; //text box increment
+                    $(wrapper).append('<div class="input-group div-add-form"><input type="text" name="no_plat[]" class="form-control" placeholder="Plate Number"><span class="remove_field input-group-btn"><button class="btn btn-danger btn-custom-action" ><i class="fa fa-times"> </i></button></span></div>'); //add input box
+                }
+            });
+           
+            $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+                e.preventDefault(); $(this).parent('div').remove(); x--;
+            });
+
+            
+            $('.email').prop("disabled", true);
+            $('.telp').prop("disabled", true);
+
+            $(".agree_email").click(function(){
+                if($(this).prop("checked") == true){
+                    $('.email').prop("disabled", false);
+                }
+                else if($(this).prop("checked") == false){
+                    $('.email').prop("disabled", true);
+                }
+            });
+
+             $(".agree_telp").click(function(){
+                if($(this).prop("checked") == true){
+                    $('.telp').prop("disabled", false);
+                }
+                else if($(this).prop("checked") == false){
+                    $('.telp').prop("disabled", true);
+                }
+            });
+        });
+
+
+        var json_profile = JSON.parse({{ profile|tojson|safe }})
+        <!--var plateNumber = JSON.parse({{ platenumber|tojson|safe }})-->
+        <!--console.log(plateNumber)-->
+
+
+        document.getElementById('firstname').value = json_profile[0].firstname
+        document.getElementById('lastname').value = json_profile[0].lastname
+        document.getElementById('identityType').value = json_profile[0].identityType
+        document.getElementById('identityNumber').value = json_profile[0].identityNumber
+        document.getElementById('gender').value = json_profile[0].gender
+        document.getElementById('cityName').value = json_profile[0].cityName
+        document.getElementById('phoneNumber').value = json_profile[0].phoneNumber
+        document.getElementById('email').value = json_profile[0].email
+        document.getElementById('user_id').value = json_profile[0].user_id
+
+    </script>
+</body>
+</html>
